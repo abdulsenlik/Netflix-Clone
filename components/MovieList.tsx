@@ -1,5 +1,5 @@
 import React from 'react';
-import {divide, isEmpty} from 'lodash';
+import {isEmpty} from 'lodash';
 import MovieCard from './MovieCard'
 
 interface MovieListProps {

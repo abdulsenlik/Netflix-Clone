@@ -1,6 +1,6 @@
 
 import { NextPageContext } from "next";
-import { getSession, signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 import Navbar from "@/components/Navbar";
 import Billboard from "@/components/Billboard";
