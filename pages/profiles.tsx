@@ -11,12 +11,12 @@ export async function getServerSideProps(context: NextPageContext){
             redirect: {
                 destination: '/auth',
                 permanent: false,
-            }
-        }
+            },
+        };
        
     } return {
-        props: {}
-    }
+        props: {},
+    };
 }
 
 

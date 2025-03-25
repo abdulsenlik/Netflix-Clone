@@ -30,7 +30,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                 w-full
                 h-[12vw]
                 "
-                src={data.thumbnailUrl} alt="Thumbnail" />
+                src={`/api/image-proxy?url=${encodeURIComponent(data.thumbnailUrl)}`} alt="Thumbnail" />
                 <div className="
                 opacity-0
                 absolute
@@ -58,7 +58,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     w-full
                     h-[12vw]
                     "
-                    src={data.thumbnailUrl} alt="thumbnail" />
+                    src={`/api/image-proxy?url=${encodeURIComponent(data.thumbnailUrl)}`} alt="thumbnail" />
                     <div
                     className="
                     z-10

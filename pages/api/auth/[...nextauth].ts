@@ -28,34 +28,34 @@ export const authOptions: AuthOptions = {
         },
         password: {
           label: "Password",
-          type: "passord",
+          type: "password",
         },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Email and password required");
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error("Email and password required");
+          }
+      
+          const user = await prismadb.user.findUnique({
+            where: { email: credentials.email },
+          });
+      
+          if (!user || !user.hashedPassword) {
+            throw new Error("Email does not exist");
+          }
+      
+          const isCorrectPassword = await compare(credentials.password, user.hashedPassword);
+      
+          if (!isCorrectPassword) {
+            throw new Error("Incorrect password");
+          }
+      
+          return user;
+        } catch (error) {
+          console.error("Authorize error:", error);
+          throw new Error("Login failed");
         }
-
-        const user = await prismadb.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
-
-        if (!user || !user.hashedPassword) {
-          throw new Error("Email does not exist");
-        }
-
-        const isCorrectPassword = await compare(
-          credentials.password,
-          user.hashedPassword
-        );
-
-        if (!isCorrectPassword) {
-          throw new Error("Incorrect password");
-        }
-
-        return user;
       },
     }),
   ],
