@@ -8,13 +8,6 @@ import { compare } from "bcrypt";
 
 import prismadb from "@/lib/prismadb";
 
-console.log("Loaded [...nextauth] route");
-console.log("Env:", {
-  GITHUB_ID: process.env.GITHUB_ID,
-  DATABASE_URL: process.env.DATABASE_URL,
-  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-});
-
 
 export const authOptions: AuthOptions = {
 
