@@ -67,11 +67,29 @@ export const authOptions: AuthOptions = {
   },
   debug: process.env.NODE_ENV === "development",
   adapter: PrismaAdapter(prismadb),
-  session: { strategy: "jwt" },
+  session: { 
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ session, token }) {
+      if (session?.user && token?.sub) {
+        (session.user as any).id = token.sub;
+      }
+      return session;
+    },
+    async jwt({ user, token }) {
+      if (user) {
+        token.uid = user.id;
+      }
+      return token;
+    },
+  },
 };
 
 export default NextAuth(authOptions);
